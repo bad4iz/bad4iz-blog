@@ -8,8 +8,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "publish": "git push heroku main",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
+    "publish": "git push heroku main"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -36,6 +36,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.0.3",
     "autoprefixer": "^10.2.5",
+    "axios": "^0.18.0",
     "babel-eslint": "^10.1.0",
     "chromedriver": "89",
     "eslint": "^6.7.2",
@@ -48,6 +49,7 @@
     "sass-loader": "^10.0.0",
     "tailwindcss": "^2.0.4",
     "vue-cli-plugin-apollo": "^0.22.2",
+    "vue-cli-plugin-axios": "^0.0.4",
     "vue-cli-plugin-pug": "^2.0.0",
     "vue-cli-plugin-vuetify": "^2.3.1",
     "vue-template-compiler": "^2.6.11",

@@ -10,6 +10,7 @@
     props: {
       msg: String,
     },
+
   };
 </script>
 
