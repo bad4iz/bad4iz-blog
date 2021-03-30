@@ -1,38 +1,8 @@
 <template>
   <v-app :dark="getDark">
-    <NavigationDrawer />
-    <v-app-bar
-      app
-      :clipped-left="getPrimaryDrawer.clipped"
-      absolute
-      flat
-      class="header"
-      elevate-on-scroll
-    >
-      <v-app-bar-nav-icon
-        v-if="getPrimaryDrawer.type !== 'permanent'"
-        @click.stop="setPrimaryDrawerAction({ model: !getPrimaryDrawer.model })"
-      />
-      <v-toolbar-title class="title" @click="()=>$router.push({ path: '/' })">{{ $appConfig.titleApp }}</v-toolbar-title>
+    <!--    <NavigationDrawer />-->
 
-      <v-spacer />
-
-      <v-list dense class="menu">
-        <v-list-item to="/posts">
-          <v-list-item-content>
-            <v-list-item-title>Посты</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item to="/settings-app">
-          <v-list-item-content>
-            <v-list-item-title>Философия</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-spacer />
-    </v-app-bar>
-
+    <AppBar />
     <v-main>
       <v-container fluid>
         <router-view />
@@ -46,6 +16,8 @@
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
+  import AppBar from '@/components/system/AppBar';
+  // import NavigationDrawer from '@/components/system/NavigationDrawer';
 
   const {
     mapGetters: mapGettersAppSettings,
@@ -55,7 +27,8 @@
   export default {
     name: 'App',
     components: {
-      NavigationDrawer: () => import('@/components/NavigationDrawer'),
+      // NavigationDrawer,
+      AppBar,
     },
     data: () => ({}),
     methods: {
@@ -76,14 +49,4 @@
   };
 </script>
 
-<style scoped>
-  header.v-toolbar.v-app-bar.header {
-    background-color: inherit;
-  }
-  .menu {
-    display: flex;
-  }
-  .title {
-    cursor: pointer;
-  }
-</style>
+<style scoped></style>

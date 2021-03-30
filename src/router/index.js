@@ -15,17 +15,28 @@ export const routeNavigationDrawer = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/Home'),
   },
-  {
-    path: '/posts',
-    to: '/posts',
-    icon: 'dashboard',
-    name: 'posts',
-    title: 'Публикации',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/PostsView'),
-  },
+  // {
+  //   path: '/posts',
+  //   to: '/posts',
+  //   icon: 'dashboard',
+  //   name: 'posts',
+  //   title: 'Публикации',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '@/views/PostsView'),
+  // },
+  // {
+  //   path: '/memento-mori',
+  //   to: '/memento-mori',
+  //   icon: 'dashboard',
+  //   name: 'mementoMori',
+  //   title: 'Memento Mori',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '@/views/MementoMori'),
+  // },
 ];
 
 export const routeNavigationDrawerFooter = [

@@ -1,6 +1,6 @@
 <template>
-  <div class="posts">
-    <h1>PostsView</h1>
+  <div>
+    sdfadfs
     <div v-html="parseMarkdown()"></div>
   </div>
 </template>
@@ -9,15 +9,17 @@
   import { markdown } from 'markdown';
 
   export default {
+    name: 'Markdown',
     data: () => ({
       md: 'asdfsafd',
     }),
     methods: {
       parseMarkdown() {
-        return markdown.toHTML(
-          'Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it.'
-        );
+        console.log(this);
+        return markdown.toHTML(this.$children);
       },
     },
   };
 </script>
+
+<style scoped></style>

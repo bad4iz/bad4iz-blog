@@ -4,9 +4,9 @@ export default {
     dark: false,
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
     primaryDrawer: {
-      model: null,
-      type: 'default (no property)',
-      clipped: false,
+      model: 'permanent',
+      type: 'permanent',
+      clipped: true,
       floating: false,
       mini: false,
     },
