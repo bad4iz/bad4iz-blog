@@ -1,57 +1,52 @@
-// /**
-//  * First we will load all of this project's JavaScript dependencies which
-//  * includes Vue and other libraries. It is a great starting point when
-//  * building robust, powerful web applications using Vue and Laravel.
-//  */
-//
-// require('./bootstrap');
-//
-// window.Vue = require('vue').default;
-//
-// /**
-//  * The following block of code may be used to automatically register your
-//  * Vue components. It will recursively scan this directory for the Vue
-//  * components and automatically register them with their "basename".
-//  *
-//  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-//  */
-//
-// // const files = require.context('./', true, /\.vue$/i)
-// // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-//
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// Vue.component('app', require('./App.vue').default);
-//
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-//
-// const app = new Vue({
-//     el: '#app',
-//     router,
-// });
+require('./bootstrap');
 
-import './bootstrap';
+import Vue from 'vue'
+import VueApollo from 'vue-apollo'
+
+Vue.use(VueApollo)
+
 import { router } from './routes';
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import vuetify from './plugins/vuetify' // path to vuetify export
-import store from './store';
-
-Vue.use(VueRouter);
-
-import configPlugin from './plugins/configEnv';
-Vue.use(configPlugin);
-
 import App from './App.vue';
 
 
+import { ApolloClient } from 'apollo-client'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+
+import vuetify from './plugins/vuetify'
+import store from './store';
+import configPlugin, {configEnv} from './plugins/configEnv';
+
+// HTTP connection to the API
+const httpLink = createHttpLink({
+    // You should use an absolute URL here
+    uri: configEnv.appUrlGraphql,
+})
+
+// Cache implementation
+const cache = new InMemoryCache()
+
+// Create the apollo client
+const apolloClient = new ApolloClient({
+    link: httpLink,
+    cache,
+})
+
+const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+})
+
+Vue.use(configPlugin);
+
+
+console.log(configEnv)
+
+
 const app = new Vue({
-    el: '#app',
-    components: {App},
     router,
+    el: '#app',
+    apolloProvider,
     vuetify,
-    store
+    store,
+    render: h => h(App)
 });

@@ -1,18 +1,19 @@
 <template>
-<!--    <v-app :dark="getDark">-->
-    <v-app :dark="getDark">
+        <v-app>
             <NavigationDrawer />
 
-        <AppBar />
-        <v-main>
-            <v-container fluid>
-                <router-view />
-            </v-container>
-        </v-main>
-        <v-footer :inset="getFooter.inset" app>
-            <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
-        </v-footer>
-    </v-app>
+            <AppBar />
+
+            <v-main>
+                <v-container fluid>
+                    <router-view />
+                </v-container>
+            </v-main>
+            <v-footer :inset="getFooter.inset" app>
+                <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+            </v-footer>
+        </v-app>
+
 </template>
 
 <script>
@@ -50,4 +51,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -6,13 +6,12 @@
           <v-layout row wrap>
             <v-flex xs12 md6>
               <span>Scheme</span>
-              <v-switch
-                id="getDark"
-                :value="getDark"
-                @change="toggleDarkAction"
-                primary
-                label="Dark"
-              ></v-switch>
+                <v-switch
+                    v-model="$vuetify.theme.dark"
+                    hint="This toggles the global state of the Vuetify theme"
+                    label="Vuetify Theme Dark"
+                    persistent-hint
+                ></v-switch>
             </v-flex>
             <v-flex xs12 md6>
               <span>Drawer</span>

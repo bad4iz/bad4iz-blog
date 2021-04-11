@@ -1,7 +1,7 @@
 export default {
   navDrawer: 'falsxcvzxe',
   settingsApp: {
-    dark: false,
+    dark: true,
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
     primaryDrawer: {
       model: 'permanent',

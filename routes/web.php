@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\SinglePageController;
+use App\Http\Controllers\SpaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//
-//Route::get('/welcome', function () {
+
+//Route::get('/', function () {
 //    return view('welcome');
 //});
 
-Route::get('/{any}', [SinglePageController::class, 'index'])->where('any', '.*');
+Route::get('/{any}', [SpaController::class,'index'])->where('any', '.*');

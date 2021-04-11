@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Hello from '../views/Hello';
+import HelloApollo from '../views/HelloApollo';
+import Home from '../views/Home';
 
 Vue.use(Router);
 
@@ -12,13 +15,29 @@ export const routeNavigationDrawer = [
     {
         path: '/',
         to: '/',
-        icon: 'dashboard',
         name: 'home',
+        icon: 'mdi-view-dashboard',
         title: 'Домашняя',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '@/views/Home'),
+    },
+    {
+        path: '/hello',
+        to: '/hello',
+        name: 'hello',
+        icon: 'mdi-human',
+        title: 'hello world',
+        component: Hello
+    },
+    {
+        to: '/hello-apollo',
+        path: '/hello-apollo',
+        name: 'hello-apollo',
+        icon: 'mdi-palm-tree',
+        title: 'hello qraphQl apollo ',
+        component: HelloApollo
     },
     // {
     //   path: '/posts',
@@ -49,7 +68,7 @@ export const routeNavigationDrawerFooter = [
         path: '/settings-app',
         to: '/settings-app',
         name: 'settingsApp',
-        icon: 'build',
+        icon: 'mdi-tune',
         title: 'Настройки приложения',
         component: () => import('@/views/SettingsApp'),
     },

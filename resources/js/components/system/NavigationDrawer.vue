@@ -11,7 +11,6 @@
     touchless
     app
   >
-    <v-system-bar></v-system-bar>
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
         <v-list-item>
@@ -23,6 +22,8 @@
         </v-list-item>
       </v-list>
     </v-toolbar>
+
+
 
     <v-toolbar flat class="transparent">
       <h2>{{$appConfig.titleApp}}</h2>
