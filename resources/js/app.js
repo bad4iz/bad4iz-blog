@@ -17,6 +17,8 @@ import vuetify from './plugins/vuetify'
 import store from './store';
 import configPlugin, {configEnv} from './plugins/configEnv';
 
+
+
 // HTTP connection to the API
 const httpLink = createHttpLink({
     // You should use an absolute URL here
