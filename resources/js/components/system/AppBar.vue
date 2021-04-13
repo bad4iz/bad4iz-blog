@@ -23,11 +23,11 @@
     <v-spacer />
 
     <v-list dense class="menu">
-            <v-list-item to="/posts">
-              <v-list-item-content>
-                <v-list-item-title>Посты</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+<!--            <v-list-item to="/posts">-->
+<!--              <v-list-item-content>-->
+<!--                <v-list-item-title>Посты</v-list-item-title>-->
+<!--              </v-list-item-content>-->
+<!--            </v-list-item>-->
 
       <v-list-item>
         <v-menu offset-y transition="slide-y-transition" bottom>
@@ -46,6 +46,20 @@
               target="_blank"
             >
               <v-list-item-title>Memento Mori</v-list-item-title>
+            </v-list-item>
+          </v-list>
+            <v-list dense>
+            <v-list-item
+                to="/post/journal/stream2"
+            >
+              <v-list-item-title>Поток 2.0</v-list-item-title>
+            </v-list-item>
+          </v-list>
+            <v-list dense>
+            <v-list-item
+                to="/post/journal/horseman"
+            >
+              <v-list-item-title>Всадник</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
