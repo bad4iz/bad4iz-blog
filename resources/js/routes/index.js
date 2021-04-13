@@ -24,6 +24,17 @@ export const routeNavigationDrawer = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/Home'),
     },
     {
+        path: '/mark-down-view',
+        to: '/mark-down-view',
+        name: 'MarkDownView',
+        icon: 'mdi-view-dashboard',
+        title: 'MarkDownView',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '@/views/MarkDownView'),
+    },
+    {
         path: '/hello',
         to: '/hello',
         name: 'hello',
@@ -63,6 +74,17 @@ export const routeNavigationDrawer = [
     // },
 ];
 
+export const routeOther = [
+    {
+        path: '/post/journal/:fileName',
+        // to: '/post/journal/:fileName',
+        name: 'PostsJournalView',
+        icon: 'mdi-view-dashboard',
+        title: 'PostsJournalView',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/PostsJournalView'),
+    },
+];
+
 export const routeNavigationDrawerFooter = [
     {
         path: '/settings-app',
@@ -78,5 +100,5 @@ export const routeNavigationDrawerFooter = [
 export const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: [...routeNavigationDrawer, ...routeNavigationDrawerFooter],
+    routes: [...routeNavigationDrawer, ...routeNavigationDrawerFooter, ...routeOther],
 });

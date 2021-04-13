@@ -41,9 +41,6 @@ const apolloProvider = new VueApollo({
 Vue.use(configPlugin);
 
 
-console.log(configEnv)
-
-
 const app = new Vue({
     router,
     el: '#app',

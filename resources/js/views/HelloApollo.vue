@@ -1,4 +1,4 @@
-<template>
+MarkDownView<template>
     <div>
     <h1>Hello Apollo!</h1>
         <ApolloQuery :query="UsersQuery">

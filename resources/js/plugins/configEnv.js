@@ -18,8 +18,6 @@ function parse(value, fallback) {
       return value;
   }
 }
-console.log('process.env',process.env)
-console.log('configEnv',configEnv)
 
 export { configEnv };
 export default {
