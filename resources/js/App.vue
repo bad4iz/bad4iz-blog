@@ -1,7 +1,6 @@
 <template>
         <v-app>
-            <NavigationDrawer />
-
+<!--            <NavigationDrawer />-->
             <AppBar />
 
             <v-main>
