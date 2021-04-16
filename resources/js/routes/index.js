@@ -24,6 +24,17 @@ export const routeNavigationDrawer = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/Home'),
     },
     {
+        path: '/memento-mori',
+        to: '/memento-mori',
+        name: 'memento-mori',
+        icon: 'mdi-view-dashboard',
+        title: 'memento-mori',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '@/views/MementoMoriView'),
+    },
+    {
         path: '/mark-down-view',
         to: '/mark-down-view',
         name: 'MarkDownView',
