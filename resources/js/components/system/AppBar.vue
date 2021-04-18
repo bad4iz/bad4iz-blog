@@ -7,10 +7,7 @@
     class="header"
     elevate-on-scroll
   >
-    <v-app-bar-nav-icon
-      v-if="getPrimaryDrawer.type !== 'permanent'"
-      @click.stop="setPrimaryDrawerAction({ model: !getPrimaryDrawer.model })"
-    />
+
     <v-spacer />
     <v-toolbar-title class="title" @click="()=>$router.push({ path: '/' })"
       ><h2>
@@ -22,49 +19,49 @@
 
     <v-spacer />
 
-    <v-list dense class="menu">
-<!--            <v-list-item to="/posts">-->
-<!--              <v-list-item-content>-->
-<!--                <v-list-item-title>Посты</v-list-item-title>-->
-<!--              </v-list-item-content>-->
+<!--    <v-list dense class="menu">-->
+<!--&lt;!&ndash;            <v-list-item to="/posts">&ndash;&gt;-->
+<!--&lt;!&ndash;              <v-list-item-content>&ndash;&gt;-->
+<!--&lt;!&ndash;                <v-list-item-title>Посты</v-list-item-title>&ndash;&gt;-->
+<!--&lt;!&ndash;              </v-list-item-content>&ndash;&gt;-->
+<!--&lt;!&ndash;            </v-list-item>&ndash;&gt;-->
+
+<!--      <v-list-item>-->
+<!--        <v-menu offset-y transition="slide-y-transition" bottom>-->
+<!--          <template v-slot:activator="{ on, attrs }">-->
+<!--            <v-list-item-content>-->
+<!--              <v-list-item-title v-bind="attrs" v-on="on">-->
+<!--                Философия-->
+<!--                <v-icon> mdi-text </v-icon>-->
+<!--              </v-list-item-title>-->
+<!--            </v-list-item-content>-->
+<!--          </template>-->
+
+<!--          <v-list dense>-->
+<!--            <v-list-item-->
+<!--              href="https://bad4iz.github.io/memento-mori-calendar/"-->
+<!--              target="_blank"-->
+<!--            >-->
+<!--              <v-list-item-title>Memento Mori</v-list-item-title>-->
 <!--            </v-list-item>-->
-
-      <v-list-item>
-        <v-menu offset-y transition="slide-y-transition" bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-list-item-content>
-              <v-list-item-title v-bind="attrs" v-on="on">
-                Философия
-                <v-icon> mdi-text </v-icon>
-              </v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list dense>
-            <v-list-item
-              href="https://bad4iz.github.io/memento-mori-calendar/"
-              target="_blank"
-            >
-              <v-list-item-title>Memento Mori</v-list-item-title>
-            </v-list-item>
-          </v-list>
-            <v-list dense>
-            <v-list-item
-                to="/post/journal/stream2"
-            >
-              <v-list-item-title>Поток 2.0</v-list-item-title>
-            </v-list-item>
-          </v-list>
-            <v-list dense>
-            <v-list-item
-                to="/post/journal/horseman"
-            >
-              <v-list-item-title>Всадник</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-list-item>
-    </v-list>
+<!--          </v-list>-->
+<!--            <v-list dense>-->
+<!--            <v-list-item-->
+<!--                to="/post/journal/stream2"-->
+<!--            >-->
+<!--              <v-list-item-title>Поток 2.0</v-list-item-title>-->
+<!--            </v-list-item>-->
+<!--          </v-list>-->
+<!--            <v-list dense>-->
+<!--            <v-list-item-->
+<!--                to="/post/journal/horseman"-->
+<!--            >-->
+<!--              <v-list-item-title>Всадник</v-list-item-title>-->
+<!--            </v-list-item>-->
+<!--          </v-list>-->
+<!--        </v-menu>-->
+<!--      </v-list-item>-->
+<!--    </v-list>-->
   </v-app-bar>
 </template>
 

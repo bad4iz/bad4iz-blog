@@ -1,5 +1,5 @@
 <template>
-    <v-card to="/memento-mori">
+    <v-card class="mt-16" to="/memento-mori">
         <div class="relative bg-white overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                     src="https://cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-framed-258889_900x.jpg?v=1602711905"
-                     alt="">
+                <div class="parallax h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+                     >
+                </div>
             </div>
         </div>
 
@@ -52,5 +52,22 @@ export default {
 </script>
 
 <style scoped>
+.parallax {
+    /* The image used */
+    /*background-image: url("https://cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-framed-258889_900x.jpg");*/
+    background-image: url("http://cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-framed-438032_900x.jpg");
+    /*background-image: url("http://cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-framed-309021_900x.jpg");*/
 
+    /* Set a specific height */
+    /*min-height: 500px;*/
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position:  bottom -100px right 10px;
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+
+    /*filter: blur(1px);*/
+    /*box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);*/
+}
 </style>
