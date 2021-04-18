@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="cont">
         <MementoMoriWidget/>
-        <ReadBooksWidget/>
-        <OneLatteRuleWidget/>
-        <Stream2Widget />
-        <HorsemanWidget />
+<!--        <ReadBooksWidget/>-->
+<!--        <OneLatteRuleWidget/>-->
+<!--        <Stream2Widget />-->
+<!--        <HorsemanWidget />-->
+
     </div>
 </template>
 
@@ -28,5 +29,7 @@ export default {
 </script>
 
 <style scoped>
-
+.cont {
+    margin-bottom: 600px;
+}
 </style>
