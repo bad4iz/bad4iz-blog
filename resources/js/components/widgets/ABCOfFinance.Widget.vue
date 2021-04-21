@@ -1,53 +1,54 @@
 <template>
     <div class="mt-12 parallax flex justify-center align-center">
-
-        <v-card
-            class="mx-auto my-16"
-            max-width="400"
+        <v-hover
+            close-delay="300"
+            v-slot="{ hover }"
         >
-            <v-img
-                src="/img/abc-finance.png"
-                height="200px"
-            ></v-img>
+            <v-card
+                class="mx-auto my-16"
+                max-width="400"
+                :elevation="hover ? 12 : 2"
+            >
+                <v-img
+                    src="/img/abc-finance.png"
+                    height="200px"
+                    class="flex  "
+                >
 
-            <v-card-title>
-                Азбука финансового образования
-            </v-card-title>
 
-            <v-card-subtitle>
-                постигаем нужное
-            </v-card-subtitle>
+                    <v-card-title class="v-card-title px-0">
+                        <p class="bg-white bg-opacity-25 text-center mb-0 ">
+                            Способ простой.
+                        </p>
+                    </v-card-title>
 
-                    <v-card-actions>
-                        <v-btn
-                            text
-                            color="deep-purple accent-4"
-                            to="/post/journal/ABCOfFinance"
-                        >
-                            Подробнее
-                        </v-btn>
-                    </v-card-actions>
+                </v-img>
 
-        </v-card>
-<!--    <v-card max-width="600px" class="">-->
-<!--        <v-card-text>-->
-<!--            <div>постигаем нужное</div>-->
-<!--            <p class="display-1 text&#45;&#45;primary">-->
-<!--              Азбука финансового образования-->
-<!--            </p>-->
-<!--            <div class="text&#45;&#45;primary">-->
-<!--            </div>-->
-<!--        </v-card-text>-->
-<!--        <v-card-actions>-->
-<!--            <v-btn-->
-<!--                text-->
-<!--                color="deep-purple accent-4"-->
-<!--                to="/post/journal/ABCOfFinance"-->
-<!--            >-->
-<!--                Больше-->
-<!--            </v-btn>-->
-<!--        </v-card-actions>-->
-<!--    </v-card>-->
+                <v-card-title>
+                    Азбука финансового образования
+                </v-card-title>
+
+                <v-card-subtitle>
+                    <p class="text-gray-600"> Учимся планировать и копить
+                    </p>
+                    <p class="pb-0 mb-0">
+                        Способ простой. Логичный. Устанавливаем цели
+                    </p>
+                </v-card-subtitle>
+
+                <v-card-actions>
+                    <v-btn
+                        text
+                        color="deep-purple accent-4"
+                        to="/post/journal/ABCOfFinanceSimple"
+                    >
+                        Подробнее
+                    </v-btn>
+                </v-card-actions>
+
+            </v-card>
+        </v-hover>
+
     </div>
 </template>
 
@@ -87,11 +88,21 @@ export default {
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position:  center;
+    background-position: center;
     background-repeat: no-repeat;
     /*background-size: cover;*/
 
     /*filter: blur(1px);*/
     /*box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);*/
+}
+
+.v-card {
+    transition: all .3s ease-in-out;
+}
+.v-card-title{
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
 }
 </style>
