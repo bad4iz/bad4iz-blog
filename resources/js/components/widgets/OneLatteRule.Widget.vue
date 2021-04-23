@@ -1,98 +1,177 @@
 <template>
-    <v-card class="my-9" >
-        <v-list-item two-line>
-            <v-list-item-content>
-                <v-list-item-title class="headline">
-                    San Francisco
-                </v-list-item-title>
-                <v-list-item-subtitle>Mon, 12:30 PM, Mostly sunny</v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
+    <v-card class="mt-16" flat>
+
+        <v-card-title>
+            <h2>Правило одного Латте</h2>
+        </v-card-title>
 
         <v-card-text>
-            <v-row align="center">
-                <v-col
-                    class="display-3"
-                    cols="6"
-                >
-                    23&deg;C
+
+            <v-row>
+                <v-col md="3" sm="12" class="flex">
+                    <v-card >
+                        <v-img
+                            class="white--text align-end"
+                            height="250px"
+                            src="/img/latte.jpg"
+                        >
+                            <v-card-title class="bg-white bg-opacity-25 text-gray-900 ">Правило одного Латте</v-card-title>
+                        </v-img>
+
+                        <v-card-subtitle
+                        ><h3>
+                            Кофе за {{ A }} рублей обойдется тебе
+                            <span style="white-space: nowrap"
+                            >{{ moneyFormat(FV) }} рублей</span
+                            >
+                        </h3></v-card-subtitle
+                        >
+
+                        <v-card-text>
+                            <div>
+                                Отказавшись от стакана кофе условной стоимостью в
+                                <strong>{{ A }} рублей</strong>, купленного перед работой в кофейне,
+                                или от пачки сигарет .. ну или от кружки пива. Вроде небольшие
+                                {{ A }} рублей, но вы тем самым сможете увеличить размер ежемесячных
+                                сбережений.
+                            </div>
+
+                            <div>
+                                А начав инвестировать эти накопления можно увеличить. За
+                                <strong>{{ n }}</strong> лет вы можете заработать
+                                <h3>{{ moneyFormat(FV) }} рублей.</h3>
+                                А за <strong>{{ n + 5 }}</strong> лет уже
+                                <h3>{{ moneyFormat(getFV(n + 5)) }} рублей.</h3>
+                            </div>
+                        </v-card-text>
+                    </v-card>
                 </v-col>
-                <v-col cols="6">
-                    <v-img
-                        src="https://cdn.vuetifyjs.com/images/cards/sun.png"
-                        alt="Sunny image"
-                        width="92"
-                    ></v-img>
+                <v-col md="9" sm="12" class="flex">
+                    <v-card width="100%">
+                        <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
+
+                        <v-card-subtitle>
+                            Получаем {{ moneyFormat(FV) }} рублей за {{ n }} лет
+                        </v-card-subtitle>
+
+                        <v-card-text class="text--primary">
+                            <div>
+                                <v-slider
+                                    v-model="n"
+                                    :label="`Количество лет: ${n}`"
+                                    min="1"
+                                    max="60"
+                                ></v-slider>
+                                <v-slider
+                                    v-model="A"
+                                    :label="`Буду откладывать каждый день:  ${A}`"
+                                    min="1"
+                                    max="3000"
+                                ></v-slider>
+                            </div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer/>
+                            <v-btn
+                                class="hover:shadow"
+                                color="primary"
+                                outlined
+                                variant
+                                @click="$router.push('permanent-annuity')">
+                                Поигратся с большими параметрами
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
                 </v-col>
             </v-row>
         </v-card-text>
-
-        <v-list-item>
-            <v-list-item-icon>
-                <v-icon>mdi-send</v-icon>
-            </v-list-item-icon>
-            <v-list-item-subtitle>23 km/h</v-list-item-subtitle>
-        </v-list-item>
-
-        <v-list-item>
-            <v-list-item-icon>
-                <v-icon>mdi-cloud-download</v-icon>
-            </v-list-item-icon>
-            <v-list-item-subtitle>48%</v-list-item-subtitle>
-        </v-list-item>
-
-        <v-slider
-            v-model="time"
-            :max="6"
-            :tick-labels="labels"
-            class="mx-4"
-            ticks
-        ></v-slider>
-
-        <v-list class="transparent">
-            <v-list-item
-                v-for="item in forecast"
-                :key="item.day"
-            >
-                <v-list-item-title>{{ item.day }}</v-list-item-title>
-
-                <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-subtitle class="text-right">
-                    {{ item.temp }}
-                </v-list-item-subtitle>
-            </v-list-item>
-        </v-list>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-            <v-btn text>
-                Full Report
-            </v-btn>
-        </v-card-actions>
     </v-card>
 </template>
 
+
 <script>
+import { D3LineChart } from 'vue-d3-charts';
+
 export default {
-    name: 'OneLatteRule',
-    data () {
+    name: 'Home',
+    data() {
         return {
-            labels: ['SU', 'MO', 'TU', 'WED', 'TH', 'FR', 'SA'],
-            time: 0,
-            forecast: [
-                { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },
-                { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
-                { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
-            ],
-        }
+            A: 150,
+            n: 40,
+            r: 0.16,
+            m: 12,
+            p: 12,
+            cache1: {},
+            chartData: [],
+            chartConfig: {
+                values: ['FV'],
+                date: {
+                    key: 'year',
+                    inputFormat: '%Y',
+                    outputFormat: '%Y',
+                },
+                transition: {
+                    ease: 'easeBounceOut',
+                    duration: 100,
+                },
+                axis: {
+                    yFormat: '.1s',
+                    yTitle: 'Накоплено денег',
+                },
+                margin: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 70,
+                },
+            },
+        };
+    },
+    computed: {
+        FV() {
+            const {n, chartData} = this;
+            this.chartDataClear();
+            for (let i = 0; i < n; i++) {
+                chartData.push({
+                    FV: this.getFV(i) || 0,
+                    year: i,
+                });
+            }
+            return this.getFV(n);
+        },
+    },
+    methods: {
+        getFV(n) {
+            const {A, m, p, r} = this;
+            const nameCache = `${A}-${n}-${m}-${p}-${r}`;
+            if(this.cache1[nameCache]) {
+                return this.cache1[nameCache];
+            }
+            const top = (1 + r / m) ** (m * n) - 1;
+            const bottom = (1 + r / m) ** (m / p) - 1;
+            this.cache1[nameCache] = Math.round(A * 30 * (top / bottom) || 0);
+            return this.cache1[nameCache];
+        },
+        chartDataClear() {
+            while (this.chartData.length) {
+                this.chartData.pop();
+            }
+        },
+        moneyFormat(n) {
+            return parseFloat(n)
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+\.)/g, '$1 ')
+                .replace('.', ',');
+        },
+    },
+    components: {
+        D3LineChart,
     },
 };
 </script>
 
-<style scoped>
-
+<style>
+.chart__wrapper {
+    margin-top: 0 !important;
+}
 </style>

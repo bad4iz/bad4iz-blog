@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '../views/Hello';
 import HelloApollo from '../views/HelloApollo';
+import PermanentAnnuityView from '../views/PermanentAnnuity.View';
 import Home from '../views/Home';
 
 Vue.use(Router);
@@ -60,6 +61,14 @@ export const routeNavigationDrawer = [
         icon: 'mdi-palm-tree',
         title: 'hello qraphQl apollo ',
         component: HelloApollo
+    },
+    {
+        to: '/permanent-annuity',
+        path: '/permanent-annuity',
+        name: 'permanent-annuity',
+        icon: 'mdi-palm-tree',
+        title: 'Постоянный Аннуитет',
+        component: PermanentAnnuityView
     },
     // {
     //   path: '/posts',

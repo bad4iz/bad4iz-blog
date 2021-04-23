@@ -2,8 +2,8 @@
     <div class="cont">
         <MementoMoriWidget/>
         <ABCOfFinanceWidget/>
+        <OneLatteRuleWidget/>
 <!--        <ReadBooksWidget/>-->
-<!--        <OneLatteRuleWidget/>-->
 <!--        <Stream2Widget />-->
 <!--        <HorsemanWidget />-->
 
