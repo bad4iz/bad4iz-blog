@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <div>
         <div class="parallax">
 
             <div class="parallax__layer parallax__layer--back">
@@ -19,35 +19,11 @@
                     </v-sheet>
 
                 </div>
-                <v-row class="mt-5">
-                    <v-col md="3">
-                        <v-card elevation="4" class="ml-3 memento-mori-small__">
-                            <v-card-title>
-                                <h1 class="mx-auto uppercase">
-                                    Memento mori
-                                </h1>
-
-                            </v-card-title>
-                            <v-card-text>
-
-                                <div
-                                    class="flex-nowrap flex memento-mori-small__row justify-center"
-                                    v-for="year in 90"
-                                    :key="year">
-                                    <div
-                                        v-for="week in 54"
-                                        :key="week"
-                                        :class="['memento-mori-small__cell', { 'weeks-burned-out': (year <= burnedOut.years ||(year - 1 === burnedOut.years && week <= burnedOut.weeks)) }]"
-                                    >
-
-                                    </div>
-                                </div>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                    <v-col
-                        md="3"
-                        offset-md="6"
+                <v-row class="mt-5 flex justify-between min-sm__resp-row">
+                    <v-card
+                        max-width="400"
+                        class="ml-3"
+                        flat
                     >
                         <v-carousel
                             cycle
@@ -72,13 +48,66 @@
                                 </v-alert>
                             </v-carousel-item>
                         </v-carousel>
-                    </v-col>
+                    </v-card>
+                    <v-card  max-width="400" min-width="350" elevation="4" class="ml-3 memento-mori-small__">
+                        <v-card-title>
+                            <v-menu
+                                ref="menuLittle"
+                                v-model="menuLittle"
+                                :close-on-content-click="false"
+                                transition="scale-transition"
+                                offset-y
+                                min-width="auto"
+                            >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field
+                                        class="hidden-md-and-up"
+                                        v-model="date"
+                                        label="Укажи День рождения"
+                                        prepend-icon="mdi-calendar"
+                                        readonly
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker
+                                    ref="picker"
+                                    v-model="date"
+                                    :max="new Date().toISOString().substr(0, 10)"
+                                    min="1950-01-01"
+                                    locale="ru"
+                                    first-day-of-week="1"
+                                    @change="save"
+                                ></v-date-picker>
+                            </v-menu>
+                            <h1 class="mx-auto uppercase">
+                                Memento mori
+                            </h1>
+
+                        </v-card-title>
+                        <v-card-text>
+
+                            <div
+                                class="flex-nowrap flex memento-mori-small__row justify-center"
+                                v-for="year in 90"
+                                :key="year">
+                                <div
+                                    v-for="week in 54"
+                                    :key="week"
+                                    :class="['memento-mori-small__cell', { 'weeks-burned-out': (year <= burnedOut.years ||(year - 1 === burnedOut.years && week <= burnedOut.weeks)) }]"
+                                >
+
+                                </div>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+
 
                 </v-row>
 
             </div>
 
-            <v-row class="flex justify-center parallax__layer parallax__layer--base ">
+            <v-row class="flex justify-center parallax__layer parallax__layer--base  hidden-sm-and-down">
 
                 <v-card class="mb-8" elevation="9">
                     <v-card-title>
@@ -141,7 +170,7 @@
             </v-row>
 
         </div>
-    </v-container>
+    </div>
 </template>
 
 <script>
@@ -152,6 +181,7 @@ export default {
     data: () => ({
         date: DateTime.local().minus({year: 18}).toISODate(),
         menu: false,
+        menuLittle: false,
         images: [
             '//cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-unframed-672782_',
             '//cdn.shopify.com/s/files/1/0442/9109/6740/products/memento-mori-life-calendar-framed-947715_',
@@ -162,7 +192,7 @@ export default {
             {
                 author: 'синека',
                 text: 'Жизнь дана нам достаточно долгая, и её с избытком хватит на свершение величайших дел, если распределить её с умом. Но если она не направляется доброю целью, если наша расточительность и небрежность позволяют ей утекать у нас меж пальцев, то когда пробьёт наш последний час, мы с удивлением обнаруживаем, что жизнь, течения которой мы не заметили, истекла.',
-            } ,
+            },
             {
                 author: 'Стив Джобс',
                 text: '  Память о том, что я скоро умру — самый важный инструмент, который помогает мне принимать сложные решения в моей жизни. Потому что всё остальное — чужое мнение, вся эта гордость, вся эта боязнь смущения или провала — все эти вещи падают пред лицом смерти, оставляя лишь то, что действительно важно.',
@@ -191,10 +221,18 @@ export default {
         menu(val) {
             val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'));
         },
+        menuLittle(val) {
+            val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'));
+        },
     },
     methods: {
         save(date) {
-            this.$refs.menu.save(date);
+            if(this.menuLittle) {
+                this.$refs.menuLittle.save(date);
+            }
+            if(this.this.menu) {
+                this.$refs.menu.save(date);
+            }
         },
     },
 };
@@ -296,4 +334,15 @@ export default {
     background-color: #1a202c;
 }
 
+@media only screen and (max-width: 959px) {
+    .min-sm{
+        &__resp-row {
+            justify-content: center;
+            padding-bottom: 500px;
+        }
+    }
+    .memento-mori-small__{
+        margin-top: 1em;
+    }
+}
 </style>

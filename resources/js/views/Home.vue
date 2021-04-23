@@ -1,6 +1,6 @@
 <template>
     <div class="cont">
-        <MementoMoriWidget/>
+        <MementoMoriWidget />
         <ABCOfFinanceWidget/>
         <OneLatteRuleWidget/>
 <!--        <ReadBooksWidget/>-->

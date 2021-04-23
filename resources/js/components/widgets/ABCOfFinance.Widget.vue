@@ -7,6 +7,7 @@
             <v-card
                 class="mx-auto my-16"
                 max-width="400"
+                min-width="350"
                 :elevation="hover ? 12 : 2"
             >
                 <v-img

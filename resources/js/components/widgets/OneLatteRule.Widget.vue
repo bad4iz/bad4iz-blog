@@ -7,9 +7,10 @@
 
         <v-card-text>
 
-            <v-row>
-                <v-col md="3" sm="12" class="flex">
-                    <v-card >
+            <div class="flex justify-space-around flex-wrap">
+                    <v-card
+                        class="latte__card m-1" width="400px"
+                    >
                         <v-img
                             class="white--text align-end"
                             height="250px"
@@ -45,16 +46,14 @@
                             </div>
                         </v-card-text>
                     </v-card>
-                </v-col>
-                <v-col md="9" sm="12" class="flex">
-                    <v-card width="100%">
-                        <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
+                    <v-card class="m-1 latte__d3" width="600px">
 
+                        <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
                         <v-card-subtitle>
                             Получаем {{ moneyFormat(FV) }} рублей за {{ n }} лет
                         </v-card-subtitle>
 
-                        <v-card-text class="text--primary">
+                        <v-card-text >
                             <div>
                                 <v-slider
                                     v-model="n"
@@ -82,8 +81,7 @@
                             </v-btn>
                         </v-card-actions>
                     </v-card>
-                </v-col>
-            </v-row>
+            </div>
         </v-card-text>
     </v-card>
 </template>
@@ -170,8 +168,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .chart__wrapper {
     margin-top: 0 !important;
+}
+.latte {
+    &__card {
+        flex: 2;
+        background-color: red;
+     }
+    &__d3 {
+        flex: 6;
+    }
 }
 </style>
