@@ -38,8 +38,9 @@
 
                 <v-card-actions>
                     <v-btn
-                        text
-                        color="deep-purple accent-4"
+                        class="ml-auto"
+                        outlined
+                        color="primary"
                         to="/post/journal/ABCOfFinanceSimple"
                     >
                         Подробнее

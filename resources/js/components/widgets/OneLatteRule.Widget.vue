@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mt-16">
+    <v-card class="mt-16" flat>
 
         <v-card-title>
             <h2>Правило одного Латте</h2>
@@ -8,14 +8,14 @@
         <v-card-text>
 
             <v-row>
-                <v-col>
-                    <v-card max-width="400">
+                <v-col md="3" sm="12" class="flex">
+                    <v-card >
                         <v-img
                             class="white--text align-end"
                             height="250px"
-                            src="@/assets/latte.jpg"
+                            src="/img/latte.jpg"
                         >
-                            <v-card-title>Правило одного Латте</v-card-title>
+                            <v-card-title class="bg-white bg-opacity-25 text-gray-900 ">Правило одного Латте</v-card-title>
                         </v-img>
 
                         <v-card-subtitle
@@ -46,8 +46,8 @@
                         </v-card-text>
                     </v-card>
                 </v-col>
-                <v-col md="9">
-                    <v-card>
+                <v-col md="9" sm="12" class="flex">
+                    <v-card width="100%">
                         <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
 
                         <v-card-subtitle>
@@ -72,7 +72,12 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer/>
-                            <v-btn color="green" @click="$router.push('permanent-annuity')">
+                            <v-btn
+                                class="hover:shadow"
+                                color="primary"
+                                outlined
+                                variant
+                                @click="$router.push('permanent-annuity')">
                                 Поигратся с большими параметрами
                             </v-btn>
                         </v-card-actions>
@@ -82,6 +87,7 @@
         </v-card-text>
     </v-card>
 </template>
+
 
 <script>
 import { D3LineChart } from 'vue-d3-charts';
