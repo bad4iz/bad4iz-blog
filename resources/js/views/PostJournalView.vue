@@ -65,7 +65,7 @@ export default {
 /*}*/
 .предложить-правки {
     animation-name: edits;
-    animation-delay: .5s;
+    animation-delay: .3s;
     animation-duration: 1s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;

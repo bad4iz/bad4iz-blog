@@ -64,6 +64,11 @@ export default {
                 text: 'немного о финансах',
                 children: [
                     {
+                        title: 'История одного богатства',
+                        text: 'Сказка про накопление',
+                        path: 'abc-of-finance-history',
+                    },
+                    {
                         title: 'Учимся планировать и копить',
                         text: 'Способ простой. Логичный. Устанавливаем цели',
                         path: 'abc-of-finance-simple',
