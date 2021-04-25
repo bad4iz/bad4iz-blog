@@ -19,12 +19,12 @@
 
     <v-spacer />
 
-<!--    <v-list dense class="menu">-->
-<!--&lt;!&ndash;            <v-list-item to="/posts">&ndash;&gt;-->
-<!--&lt;!&ndash;              <v-list-item-content>&ndash;&gt;-->
-<!--&lt;!&ndash;                <v-list-item-title>Посты</v-list-item-title>&ndash;&gt;-->
-<!--&lt;!&ndash;              </v-list-item-content>&ndash;&gt;-->
-<!--&lt;!&ndash;            </v-list-item>&ndash;&gt;-->
+    <v-list dense class="menu">
+            <v-list-item @click="$router.push('posts')">
+              <v-list-item-content>
+                <v-list-item-title>Посты</v-list-item-title>
+              </v-list-item-content>
+        </v-list-item>
 
 <!--      <v-list-item>-->
 <!--        <v-menu offset-y transition="slide-y-transition" bottom>-->
@@ -61,7 +61,7 @@
 <!--          </v-list>-->
 <!--        </v-menu>-->
 <!--      </v-list-item>-->
-<!--    </v-list>-->
+    </v-list>
   </v-app-bar>
 </template>
 
