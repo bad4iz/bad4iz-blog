@@ -42,7 +42,7 @@
                         class="ml-auto"
                         outlined
                         color="primary"
-                        to="/post/journal/ABCOfFinanceSimple"
+                        to="/post/journal/abc-of-finance-simple"
                     >
                         Подробнее
                     </v-btn>
