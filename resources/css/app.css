@@ -1,24 +1,27 @@
 /*@tailwind base;*/
 
-/*h1 {*/
-/*    @apply text-3xl;*/
-/*    !*@apply font-neucha;*!*/
-/*}*/
-/*h2 {*/
-/*    @apply text-2xl;*/
-/*    !*@apply font-neucha;*!*/
-/*}*/
+h1 {
+    @apply text-3xl;
+    /*@apply font-neucha;*/
+}
+h2 {
+    @apply text-2xl;
+    /*@apply font-neucha;*/
+}
 
-/*h3 {*/
-/*    @apply text-xl;*/
-/*    !*@apply font-semibold;*!*/
-/*}*/
+h3 {
+    @apply text-xl;
+    /*@apply font-semibold;*/
+}
 
-/*h4 {*/
-/*    @apply text-lg;*/
-/*    !*@apply font-medium;*!*/
-/*}*/
+h4 {
+    @apply text-lg;
+    /*@apply font-medium;*/
+}
 
+hr {
+    margin: 1em 0;
+}
 
 
 @tailwind components;
