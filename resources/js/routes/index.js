@@ -70,6 +70,14 @@ export const routeNavigationDrawer = [
         title: 'Постоянный Аннуитет',
         component: PermanentAnnuityView
     },
+    {
+        to: '/posts',
+        path: '/posts',
+        name: 'post',
+        icon: 'mdi-palm-tree',
+        title: 'Публикации',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/PostsView'),
+    },
     // {
     //   path: '/posts',
     //   to: '/posts',
@@ -98,10 +106,10 @@ export const routeOther = [
     {
         path: '/post/journal/:fileName',
         // to: '/post/journal/:fileName',
-        name: 'PostsJournalView',
+        name: 'PostJournalView',
         icon: 'mdi-view-dashboard',
-        title: 'PostsJournalView',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/PostsJournalView'),
+        title: 'PostJournalView',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/PostJournalView'),
     },
 ];
 
