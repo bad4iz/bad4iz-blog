@@ -29,6 +29,7 @@ ln -s public public_html
 заходим в докер
 ssh localhost -p222
 
+cd bad4iz/
 ~/.local/bin/npm i
 ~/.local/bin/npm run prod
 
