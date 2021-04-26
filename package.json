@@ -27,6 +27,7 @@
         "@jamescoyle/vue-icon": "^0.1.0",
         "@mdi/font": "^5.9.55",
         "@mdi/js": "^5.9.55",
+        "@octokit/request": "^5.4.15",
         "apollo-cache-inmemory": "^1.6.6",
         "apollo-client": "^2.6.10",
         "apollo-link": "^1.2.14",

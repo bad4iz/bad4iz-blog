@@ -53,53 +53,62 @@
     </v-content>
 </template>
 
+<!--// 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 -->
 <script>
+import {request } from '@octokit/request'
+// const octokit = new window.Octokit({ auth: `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` });
+
 export default {
     name: 'PostsView',
     data: () => ({
         selectedItem: 1,
-        items: [
-            {
-                title: 'Финансы',
-                text: 'немного о финансах',
-                children: [
-                    {
-                        title: 'История одного богатства',
-                        text: 'Сказка про накопление',
-                        path: 'abc-of-finance-history',
-                    },
-                    {
-                        title: 'Учимся планировать и копить',
-                        text: 'Способ простой. Логичный. Устанавливаем цели',
-                        path: 'abc-of-finance-simple',
-                    },
-                    {
-                        title: 'Математика в помощь',
-                        text: 'Берем математику в помощь. Расчитвываем с помощью Ануитетов, скока копить и на скока хватит',
-                        path: 'abc-of-finance-annuity',
-                    },
-
-                ]
-            },
-            {
-                title: 'Растем вместе.',
-                text: 'Оказывается! до всего надо дорастать!',
-                children: [
-                    {
-                        title: 'Дорасти до суммы',
-                        path: 'grow-to-the-amount',
-                        text: 'Сказ о том что надо дорастать до суммы или статуса, ментально, духовно. В общем быть готовым к тому что вы хотите',
-                        icon: 'mdi-account'
-                    },
-                    {title: 'Дорасти до свободы', path: 'freedom', text: 'Freedom'},
-                ]
-            },
-            {title: 'Наездник', path: 'horseman', text: 'О раздвоении'},
-            {title: 'Зарплата', path: 'salary', text: 'Работать за зарплату или же зарплата за работу'},
-            {title: 'Цель', path: 'target', text: 'Цель или процесс?'},
-            {title: 'Поток 2.0', path: 'steam_2_0', text: ''},
-        ],
+        items: [],
     }),
+    methods: {
+        async getPostsList() {
+            const res = await window.axios.get('/api/get-github-file/journal/posts.json');
+            this.items = res.data.posts
+        },
+        async jopa(path) {
+            const result = await request("POST /graphql", {
+                headers: {
+                    authorization: "token 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",
+                },
+                query: `query ($path: String!) {
+                   repository(name: "journal", owner: "bad4iz") {
+                    info: ref(qualifiedName: "master") {
+                      target {
+                        ... on Commit {
+                          history(path: $path) {
+                            nodes {
+                              message
+                              pushedDate
+                              committedDate
+                              authoredDate
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  }`,
+                variables: {
+                    path,
+                },
+            });
+            console.log(`${result.data.length} repos found.`);
+            // const a = await octokit.request('GET /repos/bad4iz/journal/contents/horseman.md', {
+            //     owner: 'bad4iz',
+            //     repo: 'journal',
+            //     path: 'path'
+            // })
+            // console.log(a);
+        }
+    },
+    mounted() {
+        this.jopa('steam20.md')
+        this.getPostsList();
+    }
 };
 </script>
 
