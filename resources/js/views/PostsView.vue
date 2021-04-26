@@ -81,11 +81,22 @@ export default {
 
                 ]
             },
-            {title: 'Дорасти до суммы', path: 'grow-to-the-amount', text: 'Сказ о том что надо дорастать до суммы или статуса, ментально, духовно. В общем быть готовым к тому что вы хотите', icon: 'mdi-account'},
+            {
+                title: 'Дорасти до суммы',
+                text: 'Растем вместе. Оказывается! до всего надо дорастать!',
+                children: [
+                    {
+                        title: 'Дорасти до суммы',
+                        path: 'grow-to-the-amount',
+                        text: 'Сказ о том что надо дорастать до суммы или статуса, ментально, духовно. В общем быть готовым к тому что вы хотите',
+                        icon: 'mdi-account'
+                    },
+                    {title: 'Дорасти до свободы', path: 'freedom', text: 'Freedom'},
+                ]
+            },
             {title: 'Наездник', path: 'horseman', text: 'О раздвоении'},
             {title: 'Зарплата', path: 'salary', text: 'Работать за зарплату или же зарплата за работу'},
             {title: 'Цель', path: 'target', text: 'Цель или процесс?'},
-            {title: 'Freedom', path: 'freedom', text: 'Freedom'},
             {title: 'Поток 2.0', path: 'steam_2_0', text: ''},
         ],
     }),
