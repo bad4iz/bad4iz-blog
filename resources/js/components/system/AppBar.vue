@@ -20,7 +20,7 @@
     <v-spacer />
 
     <v-list dense class="menu">
-            <v-list-item @click="$router.push('posts')">
+            <v-list-item @click="$router.push('/posts')">
               <v-list-item-content>
                 <v-list-item-title>Посты</v-list-item-title>
               </v-list-item-content>

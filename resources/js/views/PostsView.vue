@@ -1,105 +1,45 @@
 <template>
-    <v-content>
+    <v-main>
         <h1 class="text-center">Записки натуралиста</h1>
-        <v-card
-            max-width="900"
-            v-for="(item, i) in items"
+        <Post
+            v-for="(post, i) in items"
             :key="i"
-            flat
-            class="mx-auto"
+            :post="post"
         >
-            <v-card-title>
-                {{ item.title }}
-            </v-card-title>
-            <v-card-text>
-                {{ item.text }}
-                <v-container v-if="item.children">
-                    <v-card
-                        class=""
-                        v-for="(child, i) in item.children"
-                        :key="i"
-                        flat
-                    >
-                        <v-card-title>
-                            {{ child.title }}
-                        </v-card-title>
-                        <v-card-text>
-                            {{ child.text }}
-                        </v-card-text>
-                        <v-card-action class="flex justify-end">
-                            <v-btn
-                                class="ml-auto"
-                                outlined
-                                color="primary"
-                                :to="`/post/journal/${child.path}`"
-                            >
-                                Почитать
-                            </v-btn>
-                        </v-card-action>
-                    </v-card>
-                </v-container>
-            </v-card-text>
-            <v-card-action v-if="item.path" class="flex justify-end">
-                <v-btn
-                    class="ml-auto"
-                    outlined
-                    color="primary"
-                    :to="`/post/journal/${item.path}`"
-                >
-                    Почитать
-                </v-btn>
-            </v-card-action>
-        </v-card>
-    </v-content>
+            <v-container v-if="post.children">
+                <Post
+                    v-for="(postChild, i) in post.children"
+                    :key="i"
+                    :post="postChild"
+                />
+            </v-container>
+        </Post>
+
+
+
+    </v-main>
 </template>
 
+<!--// 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 -->
 <script>
+import Post from '@/components/Post';
+
 export default {
     name: 'PostsView',
     data: () => ({
         selectedItem: 1,
-        items: [
-            {
-                title: 'Финансы',
-                text: 'немного о финансах',
-                children: [
-                    {
-                        title: 'История одного богатства',
-                        text: 'Сказка про накопление',
-                        path: 'abc-of-finance-history',
-                    },
-                    {
-                        title: 'Учимся планировать и копить',
-                        text: 'Способ простой. Логичный. Устанавливаем цели',
-                        path: 'abc-of-finance-simple',
-                    },
-                    {
-                        title: 'Математика в помощь',
-                        text: 'Берем математику в помощь. Расчитвываем с помощью Ануитетов, скока копить и на скока хватит',
-                        path: 'abc-of-finance-annuity',
-                    },
-
-                ]
-            },
-            {
-                title: 'Растем вместе.',
-                text: 'Оказывается! до всего надо дорастать!',
-                children: [
-                    {
-                        title: 'Дорасти до суммы',
-                        path: 'grow-to-the-amount',
-                        text: 'Сказ о том что надо дорастать до суммы или статуса, ментально, духовно. В общем быть готовым к тому что вы хотите',
-                        icon: 'mdi-account'
-                    },
-                    {title: 'Дорасти до свободы', path: 'freedom', text: 'Freedom'},
-                ]
-            },
-            {title: 'Наездник', path: 'horseman', text: 'О раздвоении'},
-            {title: 'Зарплата', path: 'salary', text: 'Работать за зарплату или же зарплата за работу'},
-            {title: 'Цель', path: 'target', text: 'Цель или процесс?'},
-            {title: 'Поток 2.0', path: 'steam_2_0', text: ''},
-        ],
+        items: [],
     }),
+    components: {Post},
+    methods: {
+        async getPostsList() {
+            const res = await window.axios.get('/api/get-github-file/journal/posts.json');
+            this.items = res.data.posts
+        },
+    },
+    mounted() {
+        this.getPostsList();
+    }
 };
 </script>
 
