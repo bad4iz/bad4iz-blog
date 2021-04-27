@@ -9,7 +9,17 @@
             class="mx-auto"
         >
             <v-card-title>
+                <v-badge
+                    v-if="isNew(item.path, item.committedDate)"
+                    color="green"
+                    content="new"
+                    
+                >
+                    {{ item.title }}
+                </v-badge>
+                <span v-else>
                 {{ item.title }}
+                </span>
             </v-card-title>
             <v-card-text>
                 {{ item.text }}
@@ -21,12 +31,21 @@
                         flat
                     >
                         <v-card-title>
-                            {{ child.title }}
+                            <v-badge
+                                v-if="isNew(child.path, child.committedDate)"
+                                color="green"
+                                content="new"
+                            >
+                                {{ child.title }}
+                            </v-badge>
+                            <span v-else>
+                                {{ child.title }}
+                            </span>
                         </v-card-title>
                         <v-card-text>
                             {{ child.text }}
                         </v-card-text>
-                        <v-card-action class="flex justify-end">
+                        <v-card-actions class="flex justify-end">
                             <v-btn
                                 class="ml-auto"
                                 outlined
@@ -35,11 +54,11 @@
                             >
                                 Почитать
                             </v-btn>
-                        </v-card-action>
+                        </v-card-actions>
                     </v-card>
                 </v-container>
             </v-card-text>
-            <v-card-action v-if="item.path" class="flex justify-end">
+            <v-card-actions v-if="item.path" class="flex justify-end">
                 <v-btn
                     class="ml-auto"
                     outlined
@@ -48,15 +67,16 @@
                 >
                     Почитать
                 </v-btn>
-            </v-card-action>
+            </v-card-actions>
         </v-card>
     </v-content>
 </template>
 
 <!--// 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 -->
 <script>
-import {request } from '@octokit/request'
-// const octokit = new window.Octokit({ auth: `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` });
+import { request } from '@octokit/request';
+import { DateTime } from 'luxon';
+
 
 export default {
     name: 'PostsView',
@@ -65,14 +85,55 @@ export default {
         items: [],
     }),
     methods: {
+        isNew(path, committedDate) {
+            if(!path) {
+                return false;
+            }
+            const dateTimeLocalStorage = localStorage.getItem(path)
+            if(!dateTimeLocalStorage){
+                return true
+            }
+
+            let gitHubDate = DateTime.fromISO(committedDate)
+            let localDate = DateTime.fromISO(dateTimeLocalStorage)
+
+            return  localDate < gitHubDate;
+
+        },
         async getPostsList() {
             const res = await window.axios.get('/api/get-github-file/journal/posts.json');
-            this.items = res.data.posts
+            // this.items = res.data.posts
+            this.items = await this.jopa(res.data.posts);
+
         },
-        async jopa(path) {
-            const result = await request("POST /graphql", {
+        async getTimeCommittedDate(path, parent) {
+            const items = [...this.items];
+            const req = await this.find(path);
+            const newPosts = items.map(post => {
+                if(path === post.path) {
+                    post.committedDate = req?.committedDate;
+                }
+                return post;
+            });
+
+            this.items = newPosts;
+
+        },
+        async jopa(posts) {
+            const asyncRes = await Promise.all(posts.map(async (post) => {
+                if(post.path) {
+                    const {committedDate} = await this.find(post.path + '.md');
+                    return {...post, committedDate};
+                }
+                return post;
+            }));
+
+            return asyncRes;
+        },
+        async find(path) {
+            const req = await request('POST /graphql', {
                 headers: {
-                    authorization: "token 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",
+                    authorization: 'token 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',
                 },
                 query: `query ($path: String!) {
                    repository(name: "journal", owner: "bad4iz") {
@@ -81,10 +142,7 @@ export default {
                         ... on Commit {
                           history(path: $path) {
                             nodes {
-                              message
-                              pushedDate
                               committedDate
-                              authoredDate
                             }
                           }
                         }
@@ -96,17 +154,11 @@ export default {
                     path,
                 },
             });
-            console.log(`${result.data.length} repos found.`);
-            // const a = await octokit.request('GET /repos/bad4iz/journal/contents/horseman.md', {
-            //     owner: 'bad4iz',
-            //     repo: 'journal',
-            //     path: 'path'
-            // })
-            // console.log(a);
+            const nodes = req?.data?.data?.repository?.info?.target?.history?.nodes;
+            return nodes[0];
         }
     },
     mounted() {
-        this.jopa('steam20.md')
         this.getPostsList();
     }
 };

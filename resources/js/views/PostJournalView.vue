@@ -23,6 +23,7 @@
 import MarkDownFile from '@/components/MarkDownFile';
 import Icon from '@/components/system/Icon';
 import { camelCase } from 'lodash';
+import { DateTime } from 'luxon';
 
 export default {
     name: 'PostJournalView',
@@ -34,6 +35,12 @@ export default {
         fileName() {
             return camelCase(this.$route.params.fileName);
         }
+    },
+    methods: {
+
+    },
+    mounted() {
+        localStorage.setItem(this.$route.params.fileName, DateTime.local());
     }
 };
 </script>
