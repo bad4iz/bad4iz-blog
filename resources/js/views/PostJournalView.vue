@@ -90,9 +90,7 @@ export default {
     .content {
         padding: 1em 0;
     }
-    .предложить-правки {
-        transform: rotate(45deg) translate(3.4em, -1.5em);
-    }
+
 
     @keyframes edits {
         from {
@@ -112,9 +110,6 @@ export default {
 @media only screen and (max-width: 540px) {
     .content {
         padding: 1em 0;
-    }
-    .предложить-правки {
-        transform: rotate(45deg) translate(3.4em, -1.5em);
     }
     @keyframes edits {
         from {
