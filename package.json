@@ -1,5 +1,6 @@
 {
-    "name": "template-laravel-spa-vue-qraphql-vuetify",
+    "name": "bad4iz-blog",
+    "version": "2.0.30",
     "private": true,
     "scripts": {
         "dev": "npm run development",
