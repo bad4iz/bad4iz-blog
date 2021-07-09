@@ -38,41 +38,40 @@
                                 ></span>
                             </template>
                             <v-card
-                                color="#1F7087"
-                                dark
-                                width="600"
+
                             >
                                 <div class="d-flex flex-no-wrap ">
-                                    <v-avatar
-                                        class="ma-3"
-                                        size="125"
-                                        tile
-                                    >
-                                        <v-img :src="item.img"></v-img>
-                                    </v-avatar>
-                                    <div class="w-1/4">
-                                        <v-card-title
-                                            class="text-h5"
-                                            v-text="item.book.name"
-                                        />
 
-                                        <v-card-subtitle v-text="item.book.author"/>
+                                        <v-img
+                                            class="ma-2"
+                                            max-height="150"
+                                            max-width="150"
+                                            contain
+                                            :src="item.book.img"/>
+                                    <div>
+
+                                <v-card-title
+                                    class="text-h5"
+                                    v-text="item.book.name"
+                                />
+
+                                <v-card-subtitle v-text="item.book.author"/>
                                         <v-card-subtitle v-text="item.verdict"/>
 
-                                        <v-card-actions>
+<!--                                        <v-card-actions>-->
 
-                                            <v-btn
-                                                class="ml-2 mt-5"
-                                                outlined
-                                                small
-                                            >
-                                                START RADIO
-                                            </v-btn>
-                                        </v-card-actions>
+<!--                                            <v-btn-->
+<!--                                                class="ml-2 mt-5"-->
+<!--                                                outlined-->
+<!--                                                small-->
+<!--                                            >-->
+<!--                                                START RADIO-->
+<!--                                            </v-btn>-->
+<!--                                        </v-card-actions>-->
                                     </div>
-                                    <div class="ma-3">
-                                       {{ item.book.description}}
-                                    </div>
+<!--                                    <div class="ma-3">-->
+<!--                                       {{ item.book.description}}-->
+<!--                                    </div>-->
 
                                 </div>
                             </v-card>

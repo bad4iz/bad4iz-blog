@@ -40,6 +40,7 @@ type BookReadingProgress {
     id: ID!
     date: Date!
     progress_id: Int
+    verdict: String
     book: Book! @belongsTo
     created_at: DateTime!
     updated_at: DateTime!
