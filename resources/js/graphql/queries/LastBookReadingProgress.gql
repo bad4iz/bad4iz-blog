@@ -1,0 +1,11 @@
+query{
+    lastBookReadingProgress {
+        data {
+            id
+            date
+            book {
+                name
+            }
+        }
+    }
+}

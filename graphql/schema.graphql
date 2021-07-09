@@ -7,12 +7,40 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
+
+    books: [Book!]! @paginate(defaultCount: 10)
+    book(id: ID @eq): Book @find
+    lastBookReadingProgress: [BookReadingProgress!]! @paginate(defaultCount: 10)
 }
 
 type User {
     id: ID!
     name: String!
     email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Book {
+    id: ID!
+    name: String!
+    author: String
+    description: String
+    isbn: String
+    img: String
+    year_of_publishing: Int
+    rating: Int
+    type_book_id: Int
+    readingProgress: [BookReadingProgress] @hasMany
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type BookReadingProgress {
+    id: ID!
+    date: Date!
+    progress_id: Int
+    book: Book! @belongsTo
     created_at: DateTime!
     updated_at: DateTime!
 }

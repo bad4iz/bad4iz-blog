@@ -1,73 +1,97 @@
 <template>
-            <v-card class="my-9">
-                <v-img
-                    height="200px"
-                    src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-                >
-                    <v-app-bar
-                        flat
-                        color="rgba(0, 0, 0, 0)"
+    <v-card class="my-9">
+        <v-img
+            height="200px"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsun9-8.userapi.com%2Fc841532%2Fv841532431%2F9b9c%2FPuMLU_hRcfY.jpg&f=1&nofb=1"
+        >
+
+            <v-card-title class="white--text mt-8">
+                <v-avatar size="56">
+                    <img
+                        alt="user"
+                        src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
                     >
-                        <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
+                </v-avatar>
+                <p class="ml-3">
+                    Последние прочитанные книги
+                </p>
+            </v-card-title>
+        </v-img>
 
-                        <v-toolbar-title class="title white--text pl-0">
-                            Messages
-                        </v-toolbar-title>
+        <v-card-text>
+            <v-timeline>
+                <ApolloQuery :query="LastBookReadingProgress">
+                    <template
+                        slot-scope="{ result: { data: {lastBookReadingProgress : {data} = {}} = {}, loading }, isLoading }">
+                        <div v-if="isLoading">Loading...</div>
 
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                            color="white"
-                            icon
-                        >
-                            <v-icon>mdi-dots-vertical</v-icon>
-                        </v-btn>
-                    </v-app-bar>
-
-                    <v-card-title class="white--text mt-8">
-                        <v-avatar size="56">
-                            <img
-                                alt="user"
-                                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-                            >
-                        </v-avatar>
-                        <p class="ml-3">
-                            John Doe
-                        </p>
-                    </v-card-title>
-                </v-img>
-
-                <v-card-text>
-                    <div class="font-weight-bold ml-8 mb-2">
-                        Today
-                    </div>
-
-                    <v-timeline
-                        align-top
-                        dense
-                    >
                         <v-timeline-item
-                            v-for="message in messages"
-                            :key="message.time"
-                            :color="message.color"
-                            small
+                            v-else
+                            v-for="item in data"
+                            :key="item.id"
+                            color="green"
                         >
-                            <div>
-                                <div class="font-weight-normal">
-                                    <strong>{{ message.from }}</strong> @{{ message.time }}
+                            <template v-slot:opposite>
+                                <span
+                                    class="headline font-weight-bold ${year.color}--text"
+                                    v-text="item.date"
+                                ></span>
+                            </template>
+                            <v-card
+                                color="#1F7087"
+                                dark
+                                width="600"
+                            >
+                                <div class="d-flex flex-no-wrap ">
+                                    <v-avatar
+                                        class="ma-3"
+                                        size="125"
+                                        tile
+                                    >
+                                        <v-img :src="item.img"></v-img>
+                                    </v-avatar>
+                                    <div class="w-1/4">
+                                        <v-card-title
+                                            class="text-h5"
+                                            v-text="item.book.name"
+                                        />
+
+                                        <v-card-subtitle v-text="item.book.author"/>
+                                        <v-card-subtitle v-text="item.verdict"/>
+
+                                        <v-card-actions>
+
+                                            <v-btn
+                                                class="ml-2 mt-5"
+                                                outlined
+                                                small
+                                            >
+                                                START RADIO
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </div>
+                                    <div class="ma-3">
+                                       {{ item.book.description}}
+                                    </div>
+
                                 </div>
-                                <div>{{ message.message }}</div>
-                            </div>
+                            </v-card>
                         </v-timeline-item>
-                    </v-timeline>
-                </v-card-text>
-            </v-card>
+                    </template>
+                </ApolloQuery>
+
+            </v-timeline>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
+import LastBookReadingProgress from '@/graphql/queries/LastBookReadingProgress.gql';
+
 export default {
     name: 'ReadBooks',
     data: () => ({
+        LastBookReadingProgress,
         messages: [
             {
                 from: 'You',

@@ -3,7 +3,7 @@
         <MementoMoriWidget />
         <ABCOfFinanceWidget/>
         <OneLatteRuleWidget/>
-<!--        <ReadBooksWidget/>-->
+        <ReadBooksWidget/>
 <!--        <Stream2Widget />-->
 <!--        <HorsemanWidget />-->
 
