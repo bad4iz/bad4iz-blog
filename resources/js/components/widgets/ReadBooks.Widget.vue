@@ -1,94 +1,96 @@
 <template>
-            <v-card class="my-9">
-                <v-img
-                    height="200px"
-                    src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
+    <v-card class="my-9">
+        <v-img
+            height="200px"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsun9-8.userapi.com%2Fc841532%2Fv841532431%2F9b9c%2FPuMLU_hRcfY.jpg&f=1&nofb=1"
+        >
+
+            <v-card-title class="white--text mt-8">
+                <v-avatar size="56">
+                    <img
+                        alt="user"
+                        src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
+                    >
+                </v-avatar>
+                <p class="ml-3">
+                    Последние прочитанные книги
+                </p>
+                <v-btn
+                    class="ml-auto"
+                    color="primary"
+                    to="/books-read"
                 >
-                    <v-app-bar
-                        flat
-                        color="rgba(0, 0, 0, 0)"
-                    >
-                        <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
+                    Все книги
+                </v-btn>
+            </v-card-title>
+        </v-img>
+        <v-card-text>
+            <v-timeline>
+                <v-timeline-item
+                    v-for="book in books"
+                    :key="book.id"
+                    color="green"
+                >
+                    <template v-slot:opposite>
+                        <span
+                            class="headline font-weight-bold ${year.color}--text"
+                            v-text="book.date"
+                        ></span>
+                    </template>
+                    <v-card>
+                        <div class="d-flex flex-no-wrap ">
 
-                        <v-toolbar-title class="title white--text pl-0">
-                            Messages
-                        </v-toolbar-title>
-
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                            color="white"
-                            icon
-                        >
-                            <v-icon>mdi-dots-vertical</v-icon>
-                        </v-btn>
-                    </v-app-bar>
-
-                    <v-card-title class="white--text mt-8">
-                        <v-avatar size="56">
-                            <img
-                                alt="user"
-                                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-                            >
-                        </v-avatar>
-                        <p class="ml-3">
-                            John Doe
-                        </p>
-                    </v-card-title>
-                </v-img>
-
-                <v-card-text>
-                    <div class="font-weight-bold ml-8 mb-2">
-                        Today
-                    </div>
-
-                    <v-timeline
-                        align-top
-                        dense
-                    >
-                        <v-timeline-item
-                            v-for="message in messages"
-                            :key="message.time"
-                            :color="message.color"
-                            small
-                        >
+                            <v-img
+                                class="ma-2"
+                                max-height="150"
+                                max-width="150"
+                                contain
+                                :src="book.img"/>
                             <div>
-                                <div class="font-weight-normal">
-                                    <strong>{{ message.from }}</strong> @{{ message.time }}
-                                </div>
-                                <div>{{ message.message }}</div>
+
+                                <v-card-title
+                                    class="text-h5"
+                                    v-text="book.name"
+                                />
+
+                                <v-card-subtitle v-text="book.author"/>
+                                <v-card-subtitle v-text="book.verdict"/>
                             </div>
-                        </v-timeline-item>
-                    </v-timeline>
-                </v-card-text>
-            </v-card>
+                        </div>
+
+                    </v-card>
+                </v-timeline-item>
+
+            </v-timeline>
+        </v-card-text>
+        <v-card-actions>
+            <v-btn
+                class="ml-auto"
+                color="primary"
+                to="/books-read"
+            >
+                Все книги
+            </v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
 export default {
-    name: 'ReadBooks',
+    name: 'ReadBooksWidget',
     data: () => ({
-        messages: [
-            {
-                from: 'You',
-                message: `Sure, I'll see you later.`,
-                time: '10:42am',
-                color: 'deep-purple lighten-1',
-            },
-            {
-                from: 'John Doe',
-                message: 'Yeah, sure. Does 1:00pm work?',
-                time: '10:37am',
-                color: 'green',
-            },
-            {
-                from: 'You',
-                message: 'Did you still want to grab lunch today?',
-                time: '9:47am',
-                color: 'deep-purple lighten-1',
-            },
-        ],
+        books: [],
     }),
+    methods: {
+        async getPostsList() {
+            const res = await window.axios.get('/api/get-github-file/journal/readBooks.json?');
+            console.log(res);
+            this.books = res.data.books.slice(0, 5);
+        },
+    },
+    mounted() {
+        this.getPostsList();
+    }
 };
 </script>
 

@@ -78,6 +78,14 @@ export const routeNavigationDrawer = [
         title: 'Публикации',
         component: () => import(/* webpackChunkName: "about" */ '@/views/PostsView'),
     },
+    {
+        to: '/books-read',
+        path: '/books-read',
+        name: 'booksRead',
+        icon: 'mdi-palm-tree',
+        title: 'Прочитанные книги',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/BooksRead.View'),
+    },
     // {
     //   path: '/posts',
     //   to: '/posts',

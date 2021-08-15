@@ -1,0 +1,22 @@
+query{
+    lastBookReadingProgress {
+        data {
+            id
+            date
+            verdict
+            book {
+                id
+                name
+
+                author
+                description
+                isbn
+                img
+                year_of_publishing
+                rating
+                type_book_id
+
+            }
+        }
+    }
+}

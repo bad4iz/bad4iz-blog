@@ -1,4 +1,4 @@
-(self["webpackChunktemplate_laravel_spa_vue_qraphql_vuetify"] = self["webpackChunktemplate_laravel_spa_vue_qraphql_vuetify"] || []).push([["resources_js_views_SettingsApp_vue"],{
+(self["webpackChunkbad4iz_blog"] = self["webpackChunkbad4iz_blog"] || []).push([["resources_js_views_SettingsApp_vue"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SettingsApp.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************!*\
