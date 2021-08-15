@@ -20,47 +20,57 @@
 
         <v-card-text>
             <v-timeline>
-                <ApolloQuery :query="LastBookReadingProgress">
-                    <template
-                        slot-scope="{ result: { data: {lastBookReadingProgress : {data} = {}} = {}, loading }, isLoading }">
-                        <div v-if="isLoading">Loading...</div>
 
-                        <v-timeline-item
-                            v-else
-                            v-for="item in data"
-                            :key="item.id"
-                            color="green"
-                        >
-                            <template v-slot:opposite>
+                <v-timeline-item
+                    v-for="book in books"
+                    :key="book.id"
+                    color="green"
+                >
+                    <template v-slot:opposite>
                                 <span
                                     class="headline font-weight-bold ${year.color}--text"
-                                    v-text="item.date"
+                                    v-text="book.date"
                                 ></span>
-                            </template>
-                            <v-card>
-                                <div class="d-flex flex-no-wrap ">
-
-                                    <v-img
-                                        class="ma-2"
-                                        max-height="150"
-                                        max-width="150"
-                                        contain
-                                        :src="item.book.img"/>
-                                    <div>
-
-                                        <v-card-title
-                                            class="text-h5"
-                                            v-text="item.book.name"
-                                        />
-
-                                        <v-card-subtitle v-text="item.book.author"/>
-                                        <v-card-subtitle v-text="item.verdict"/>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </v-timeline-item>
                     </template>
-                </ApolloQuery>
+                    <v-card>
+                        <div class="d-flex flex-no-wrap ">
+
+                            <v-img
+                                class="ma-2"
+                                max-height="150"
+                                max-width="150"
+                                contain
+                                :src="book.img"/>
+                            <div>
+
+                                <v-card-title
+                                    class="text-h5"
+                                    v-text="book.name"
+                                />
+
+                                <v-card-subtitle v-text="book.author"/>
+                                <v-card-subtitle v-text="book.verdict"/>
+                            </div>
+                        </div>
+                        <v-card-actions>
+                            <v-btn
+                                v-if="book.litres"
+                                class="ml-auto"
+                                text
+                                color="orange"
+                                target="_blank"
+                                :href="book.litres"
+                            >litres</v-btn>
+                            <v-btn
+                                v-if="book.livelib"
+                                plain
+                                color="blue"
+                                target="_blank"
+                                :href="book.livelib"
+                            >livelib</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-timeline-item>
 
             </v-timeline>
         </v-card-text>
@@ -68,15 +78,22 @@
 </template>
 
 <script>
-import LastBookReadingProgress from '@/graphql/queries/LastBookReadingProgress.gql';
 
 export default {
     name: 'BooksReadView',
     data: () => ({
-        LastBookReadingProgress,
-        messages: [
-        ],
+        books: [],
+        messages: [],
     }),
+    methods: {
+        async getPostsList() {
+            const res = await window.axios.get('/api/get-github-file/journal/readBooks.json');
+            this.books = res.data.books.slice(0, 5);
+        },
+    },
+    mounted() {
+        this.getPostsList();
+    }
 };
 </script>
 
