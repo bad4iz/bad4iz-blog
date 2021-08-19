@@ -88,7 +88,7 @@ export default {
     methods: {
         async getPostsList() {
             const res = await window.axios.get('/api/get-github-file/journal/readBooks.json');
-            this.books = res.data.books.slice(0, 5);
+            this.books = res.data.books;
         },
     },
     mounted() {
