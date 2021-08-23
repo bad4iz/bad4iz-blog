@@ -56,6 +56,7 @@
 
                                     <v-card-subtitle v-text="book.author"/>
                                     <v-card-subtitle v-text="book.verdict"/>
+                                    <v-card-subtitle v-text="book.type"/>
                                 </div>
                             </div>
                             <v-card-actions>
