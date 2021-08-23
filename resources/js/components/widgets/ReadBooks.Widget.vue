@@ -25,6 +25,8 @@
             </v-card-title>
         </v-img>
         <v-card-text>
+            <h2>Прочитано в этом году {{booksCountLaterYear}}</h2>
+            <h2>Прочитано в этом месяце {{booksCountLaterMonth}}</h2>
             <v-timeline>
                 <v-timeline-item
                     v-for="book in books"
@@ -80,11 +82,18 @@ export default {
     name: 'ReadBooksWidget',
     data: () => ({
         books: [],
+        booksCountLaterYear: 0,
+        booksCountLaterMonth: 0,
     }),
     methods: {
         async getPostsList() {
+            const dateNow = new Date();
+            const monthYear = dateNow.toLocaleDateString().slice(3)
             const res = await window.axios.get('/api/get-github-file/journal/readBooks.json?');
+
             console.log(res);
+            this.booksCountLaterYear = res.data?.books?.filter(item=>item?.date?.includes(dateNow.getFullYear()))?.length;
+            this.booksCountLaterMonth = res.data?.books?.filter(item=>item?.date?.includes(monthYear))?.length;
             this.books = res.data.books.slice(0, 5);
         },
     },
