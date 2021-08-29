@@ -112,7 +112,7 @@ export default {
             }, {});
 
             this.booksYears = Object.entries(a).map(item=>({year:item[0], books:item[1]})).reverse()
-            console.log(this.booksYears);
+
         },
     },
     mounted() {
