@@ -1,79 +1,70 @@
 <template>
     <v-card class="my-9">
-        <v-img
-            height="200px"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsun9-8.userapi.com%2Fc841532%2Fv841532431%2F9b9c%2FPuMLU_hRcfY.jpg&f=1&nofb=1"
-        >
 
-            <v-card-title class="white--text mt-8">
-                <v-avatar size="56">
-                    <img
-                        alt="user"
-                        src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-                    >
-                </v-avatar>
-                <p class="ml-3">
+            <v-card-title>
+
                     Последние прочитанные книги
-                </p>
-                <v-btn
-                    class="ml-auto"
-                    color="primary"
-                    to="/books-read"
-                >
-                    Все книги
-                </v-btn>
+
             </v-card-title>
-        </v-img>
         <v-card-text>
-            <h2>Прочитано в этом году {{booksCountLaterYear}}</h2>
-            <h2>Прочитано в этом месяце {{booksCountLaterMonth}}</h2>
-            <v-timeline>
-                <v-timeline-item
+            <div class="text-lg-end">
+
+            <h4>Прочитано в этом году {{ booksCountLaterYear }}</h4>
+            <h4>Прочитано в этом месяце {{ booksCountLaterMonth }}</h4>
+            </div>
+
+            <div class="card__container mt-4">
+                <div
                     v-for="book in books"
                     :key="book.id"
-                    color="green"
+                    class="card__item"
                 >
-                    <template v-slot:opposite>
-                        <span
-                            class="headline font-weight-bold ${year.color}--text"
-                            v-text="book.date"
-                        ></span>
-                    </template>
-                    <v-card>
-                        <div class="d-flex flex-no-wrap ">
 
-                            <v-img
-                                class="ma-2"
-                                max-height="150"
-                                max-width="150"
-                                contain
-                                :src="book.img"/>
-                            <div>
+                    <VCard
+                        class="card__img"
+                    >
+                        <v-img
+                            contain
+                            :src="book.img"
+                            max-width="150"
+                        />
 
-                                <v-card-title
-                                    class="text-h5"
-                                    v-text="book.name"
-                                />
+                    </VCard>
 
-                                <v-card-subtitle v-text="book.author"/>
-                                <v-card-subtitle v-text="book.verdict"/>
-                            </div>
-                        </div>
+                    <div class="grey--text  text-lg-end ms-4">
+                        {{ book.date }}
+                    </div>
 
-                    </v-card>
-                </v-timeline-item>
+                    <div class="mb-1 text-subtitle-5">
+                        {{ book.verdict }}
+                    </div>
 
-            </v-timeline>
+                </div>
+                <div
+                    class="card__item"
+                >
+
+                    <VCard
+                        contain
+                        to="/books-read"
+                        max-width="150"
+
+                    >
+                        <v-img
+                            class="white--text align-end"
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsun9-8.userapi.com%2Fc841532%2Fv841532431%2F9b9c%2FPuMLU_hRcfY.jpg"
+                            max-width="150"
+                        >
+
+                        <v-card-title class="all__title" > Все остальные книги...</v-card-title>
+                        </v-img>
+
+                    </VCard>
+
+
+                </div>
+            </div>
         </v-card-text>
-        <v-card-actions>
-            <v-btn
-                class="ml-auto"
-                color="primary"
-                to="/books-read"
-            >
-                Все книги
-            </v-btn>
-        </v-card-actions>
     </v-card>
 </template>
 
@@ -88,13 +79,14 @@ export default {
     methods: {
         async getPostsList() {
             const dateNow = new Date();
-            const monthYear = dateNow.toLocaleDateString().slice(3)
+            const monthYear = dateNow.toLocaleDateString().slice(3);
             const res = await window.axios.get('/api/get-github-file/journal/readBooks.json?');
 
             console.log(res);
-            this.booksCountLaterYear = res.data?.books?.filter(item=>item?.date?.includes(dateNow.getFullYear()))?.length;
-            this.booksCountLaterMonth = res.data?.books?.filter(item=>item?.date?.includes(monthYear))?.length;
-            this.books = res.data.books.slice(0, 5);
+            const booksLaterYear = res.data?.books?.filter(item => item?.date?.includes(dateNow.getFullYear()));
+            this.booksCountLaterYear = booksLaterYear?.length;
+            this.booksCountLaterMonth = res.data?.books?.filter(item => item?.date?.includes(monthYear))?.length;
+            this.books = booksLaterYear.slice(0, 21);
         },
     },
     mounted() {
@@ -103,6 +95,24 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.card {
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        align-items: baseline;
+    }
 
+    &__item {
+        max-width: 150px;
+        perspective: 500px;
+    }
+    &__img {
+        transform: rotateY(22deg);
+    }
+}
+.all__title {
+    background-color: rgb(26 32 44/52%);
+}
 </style>
