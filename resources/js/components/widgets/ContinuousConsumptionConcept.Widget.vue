@@ -1,38 +1,50 @@
 <template>
     <v-card class="mt-16 norelative">
-            <h1> Концепция постоянного потребления на протяжении жизни человека </h1>
+        <v-card-title>
+            <h2>
+                Концепция постоянного потребления на протяжении жизни человека
+            </h2>
+        </v-card-title>
+        <v-card-subtitle class="mt-5">
+            <h3> Ваша ежегодная норма потребления {{ pr(summ) }}р. </h3>
+            <h3> Сколько надо откладывать в год {{ pr(annualProfit - summ) }}р. </h3>
+            <span> * При вашем ежегодном доходе {{ pr(annualProfit) }}р. ,</span>
+            <span> рабочем стаже {{ yearsBeforeRetirement }} (лет) </span>
+            <span> и планируемой последтрудовой жизни {{ yearsBeforeRetirement }} (лет) </span>
+        </v-card-subtitle>
+        <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
+        <v-card-text>
+            <div>
+                <v-text-field
+                    label="Годовая прибыль"
+                    type="number"
+                    v-model="annualProfit"
+                ></v-text-field>
+                <v-slider
+                    v-model="proc"
+                    :label="`процентная ставка: ${proc}`"
+                    min="1"
+                    max="60"
+                ></v-slider>
+                <v-slider
+                    v-model="yearsBeforeRetirement"
+                    :label="`Количество лет до пенсии: ${yearsBeforeRetirement}`"
+                    min="1"
+                    max="60"
+                ></v-slider>
+                <v-slider
+                    v-model="yearsAfterRetirement"
+                    :label="`Количество лет после пенсии: ${yearsAfterRetirement}`"
+                    min="1"
+                    max="60"
+                ></v-slider>
 
-            <h3> Ежегодная норма потребления {{ pr(summ) }} </h3>
-            <h3> Сколько надо откладывать в год {{ pr(annualProfit - summ) }} </h3>
-            <D3LineChart :config="chartConfig" :datum="chartData"></D3LineChart>
-            <v-card-text>
-                <div>
-                    <v-text-field
-                        label="Годовая прибыль"
-                        type="number"
-                        v-model="annualProfit"
-                    ></v-text-field>
-                    <v-slider
-                        v-model="proc"
-                        :label="`процентная ставка: ${proc}`"
-                        min="1"
-                        max="60"
-                    ></v-slider>
-                    <v-slider
-                        v-model="yearsBeforeRetirement"
-                        :label="`Количество лет до пенсии: ${yearsBeforeRetirement}`"
-                        min="1"
-                        max="60"
-                    ></v-slider>
-                    <v-slider
-                        v-model="yearsAfterRetirement"
-                        :label="`Количество лет после пенсии: ${yearsAfterRetirement}`"
-                        min="1"
-                        max="60"
-                    ></v-slider>
-
-                </div>
-            </v-card-text>
+            </div>
+        </v-card-text>
+        <v-card-text>
+            <p>* расчеты в трудовой деятельности (в каждый год).  формулой: <b> накопления + (накопления * [годовой %]) + [сумма которую надо отложить] </b></p>
+            <p>* расчеты после трудовой деятельности (в каждый год). формулой: <b> накопления + (накопления * [годовой %]) - [сумма которую надо потратить] </b></p>
+        </v-card-text>
     </v-card>
 </template>
 
@@ -45,10 +57,10 @@ export default {
         yearsBeforeRetirement: 25,
         yearsAfterRetirement: 20,
         proc: 7,
-        annualProfit: 1000000,
+        annualProfit: 500000,
         chartData: [],
         chartConfig: {
-            values: [ 'save', 'T', 'sum'],
+            values: ['save', 'T', 'sum'],
             date: {
                 key: 'year',
                 inputFormat: '%Y',
@@ -64,7 +76,7 @@ export default {
                 bottom: 20,
                 left: 90,
             },
-            tooltip: { labels: [ "Копим", "Осталось", 'Наше постоянное потребление'] },
+            tooltip: {labels: ['Копим', 'Осталось', 'Наше постоянное потребление']},
             axis: {
                 yFormat: '.1s',
                 yTitle: 'Накоплено денег',
@@ -91,7 +103,7 @@ export default {
         },
         getAnnuity(n) {
             const r = Number(this.r);
-            return Math.abs(1 - (1 / ((1 + r) ** n))) / r;
+            return Math.abs(1 - (1 / ((1 + r) ** (n)))) / r;
         }
     },
     computed: {
@@ -138,7 +150,7 @@ export default {
 };
 </script>
 
-<style scoped >
+<style scoped>
 .norelative {
     position: unset;
 }
