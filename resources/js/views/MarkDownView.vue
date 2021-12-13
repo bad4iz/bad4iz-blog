@@ -33,7 +33,7 @@ export default {
         async getFile(fileName) {
             const res = await window.axios.get('api/get-github-file/journal/'+ fileName);
 
-            console.log(res)
+
             this.input = res?.data || '#hello' ;
         }
     }

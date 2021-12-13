@@ -4,6 +4,7 @@
         <ABCOfFinanceWidget/>
         <OneLatteRuleWidget/>
         <ReadBooksWidget/>
+        <ContinuousConsumptionConceptWidget/>
 <!--        <Stream2Widget />-->
 <!--        <HorsemanWidget />-->
 
@@ -12,6 +13,7 @@
 
 <script>
 import MementoMoriWidget from '@/components/widgets/MementoMori.Widget';
+import ContinuousConsumptionConceptWidget from '@/components/widgets/ContinuousConsumptionConcept.Widget';
 import ReadBooksWidget from '@/components/widgets/ReadBooks.Widget';
 import OneLatteRuleWidget from '@/components/widgets/OneLatteRule.Widget';
 import Stream2Widget from '@/components/widgets/Stream2.Widget';
@@ -22,6 +24,7 @@ export default {
     name: 'Home',
     components: {
         MementoMoriWidget,
+        ContinuousConsumptionConceptWidget,
         ReadBooksWidget,
         OneLatteRuleWidget,
         Stream2Widget,

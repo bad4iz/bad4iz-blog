@@ -82,7 +82,6 @@ export default {
             const monthYear = dateNow.toLocaleDateString().slice(3);
             const res = await window.axios.get('/api/get-github-file/journal/readBooks.json?');
 
-            console.log(res);
             const booksLaterYear = res.data?.books?.filter(item => item?.date?.includes(dateNow.getFullYear()));
             this.booksCountLaterYear = booksLaterYear?.length;
             this.booksCountLaterMonth = res.data?.books?.filter(item => item?.date?.includes(monthYear))?.length;

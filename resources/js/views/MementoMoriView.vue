@@ -203,7 +203,7 @@ export default {
                 const date1 = DateTime.local();
 
                 const diff = date1.diff(date2, ['years', 'weeks']);
-                console.log(diff.toObject());
+
                 return diff.toObject();
             }
             return {
