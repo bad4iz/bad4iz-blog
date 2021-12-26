@@ -88,7 +88,7 @@ export default {
     }),
     methods: {
         pr(v) {
-            const value = v.toFixed(0);
+            const value = Number(v).toFixed(0);
             return [...value].reverse().map((a, idx) => (idx + 1) % 3 === 0 ? ' ' + a : a).reverse().join('');
         },
         chartDataClear() {
