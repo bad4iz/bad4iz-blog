@@ -5,6 +5,7 @@
         <OneLatteRuleWidget/>
         <ReadBooksWidget/>
         <ContinuousConsumptionConceptWidget/>
+        <AveragingInvestmentVolumes/>
 <!--        <Stream2Widget />-->
 <!--        <HorsemanWidget />-->
 
@@ -19,6 +20,7 @@ import OneLatteRuleWidget from '@/components/widgets/OneLatteRule.Widget';
 import Stream2Widget from '@/components/widgets/Stream2.Widget';
 import HorsemanWidget from '@/components/widgets/Horseman.Widget';
 import ABCOfFinanceWidget from '@/components/widgets/ABCOfFinance.Widget';
+import AveragingInvestmentVolumes from '@/components/widgets/AveragingInvestmentVolumes.Widget';
 
 export default {
     name: 'Home',
@@ -29,7 +31,8 @@ export default {
         OneLatteRuleWidget,
         Stream2Widget,
         HorsemanWidget,
-        ABCOfFinanceWidget
+        ABCOfFinanceWidget,
+        AveragingInvestmentVolumes,
     }
 };
 </script>
